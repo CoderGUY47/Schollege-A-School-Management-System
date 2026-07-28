@@ -1,0 +1,53 @@
+export interface CampusNotice {
+  id: number;
+  title: string;
+  date: string;
+  category: "EXAMS" | "ACADEMIC" | "FEES" | "HOLIDAY";
+  publisher: string;
+  content: string;
+  attachments: string[];
+  urgent: boolean;
+}
+
+export const SCH_NOTICES: CampusNotice[] = [
+  {
+    id: 1,
+    title: "Mid-Term Physics & Chemistry Exam Schedule Released",
+    date: "Aug 05, 2026",
+    category: "EXAMS",
+    publisher: "Academic Control Board (SCH)",
+    content: "The mid-term examination routine for Class 12 Science stream has been finalized. Mid-terms begin on August 14, 2026. Hall tickets and seat plans can be downloaded from the student portal.",
+    attachments: ["Exam_Schedule_Class12.pdf", "Admit_Card_Instructions.pdf"],
+    urgent: true,
+  },
+  {
+    id: 2,
+    title: "Submission Deadline Extension for Chemistry Lab Reports",
+    date: "Aug 03, 2026",
+    category: "ACADEMIC",
+    publisher: "Dept of Chemistry",
+    content: "All Class 12-A students are informed that the submission deadline for Chemistry Practical Experiment #04 has been extended to August 10, 2026. Submit via student assignment portal.",
+    attachments: ["Chemistry_Lab_Guide.pdf"],
+    urgent: false,
+  },
+  {
+    id: 3,
+    title: "Semester 2 Tuition Fee Payment Deadline Notice",
+    date: "Jul 28, 2026",
+    category: "FEES",
+    publisher: "Accounts & Fees Office",
+    content: "Students are advised to clear Semester 2 tuition dues before August 20, 2026, to avoid a 5% late fee penalty on clearance receipts.",
+    attachments: ["Tuition_Fee_Structure.pdf"],
+    urgent: false,
+  },
+  {
+    id: 4,
+    title: "National Independence Day Holiday Notice",
+    date: "Jul 20, 2026",
+    category: "HOLIDAY",
+    publisher: "Principal's Office",
+    content: "The institution will remain closed on August 15, 2026, in observance of National Independence Day. Regular classes resume August 16.",
+    attachments: [],
+    urgent: false,
+  },
+];
