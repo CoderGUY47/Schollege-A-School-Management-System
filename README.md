@@ -24,6 +24,35 @@
 
 The system enables **Teachers** to publish assignments for specific classes and subjects with deadlined submission windows, **Students** to view deadlines, submit homework, and receive grades, and **Administrators** to manage user rosters, course allocations, financial analytics, and system-wide announcements.
 
+### 🖼️ System Layouts & Interface Previews
+
+<table>
+  <tr>
+    <td width="50%" align="center">
+      <img src="frontend/public/layouts/homepage.png" alt="Homepage & Auth Portal" width="100%" />
+      <br />
+      <strong>🔐 Homepage & Authentication Portal</strong>
+    </td>
+    <td width="50%" align="center">
+      <img src="frontend/public/layouts/admin-portal.png" alt="Admin Executive Dashboard" width="100%" />
+      <br />
+      <strong>🏛️ Admin Executive Dashboard</strong>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" align="center">
+      <img src="frontend/public/layouts/teacher-portal.png" alt="Teacher Faculty Workspace" width="100%" />
+      <br />
+      <strong>👩‍🏫 Teacher & Faculty Workspace</strong>
+    </td>
+    <td width="50%" align="center">
+      <img src="frontend/public/layouts/student-portal.png" alt="Student Academic Portal" width="100%" />
+      <br />
+      <strong>👨‍🎓 Student Academic Portal</strong>
+    </td>
+  </tr>
+</table>
+
 ---
 
 ## 👑 User Roles & Responsibilities
