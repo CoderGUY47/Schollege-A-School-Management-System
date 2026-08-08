@@ -143,7 +143,7 @@ export default function AdminHeader({ activeMenu }: { activeMenu?: string } = {}
   };
 
   return (
-    <header className="flex items-center justify-between gap-4">
+    <header className="px-6 py-4 md:px-8 bg-white border-b border-slate-200/80 flex items-center justify-between gap-4 shrink-0 shadow-xs z-30 font-outfit">
       {/* Left: Page title / brand */}
       <div className="flex items-center gap-2">
         <span className="text-sm font-bold text-slate-800 tracking-tight">
