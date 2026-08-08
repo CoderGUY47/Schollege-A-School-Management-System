@@ -203,8 +203,8 @@ export default function LoginPage() {
           <div className="relative p-10 md:p-14 text-white flex flex-col justify-between overflow-hidden min-h-[580px] border-none">
             {/* Background Image & Overlay */}
             <div
-              className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-              style={{ backgroundImage: `url('/campus_hero_bg.png')` }}
+              className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40"
+              style={{ backgroundImage: `url('/images/campus.jpg')` }}
             />
             <div className="absolute inset-0 bg-gradient-to-br from-black via-black/90 to-black/80" />
 
