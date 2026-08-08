@@ -14,7 +14,10 @@ export const metadata: Metadata = {
   title: "Schollege - School & College Management System",
   description: "Comprehensive Role-Based School & College Management Portal for Students, Faculty, and Administrators",
   icons: {
-    icon: "/images/logo.png",
+    icon: [
+      { url: "/images/logo.png" },
+      { url: "/icon.png" },
+    ],
     shortcut: "/images/logo.png",
     apple: "/images/logo.png",
   },
@@ -28,6 +31,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${outfit.variable} font-outfit h-full antialiased`}>
       <head>
+        {/* Favicon & Logo Tab Icons */}
+        <link rel="icon" type="image/png" sizes="32x32" href="/images/logo.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/images/logo.png" />
+        <link rel="shortcut icon" href="/images/logo.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/images/logo.png" />
         <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
