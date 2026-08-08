@@ -20,15 +20,19 @@ export default function AdminFinancialTrend({
   financialSummary,
 }: AdminFinancialTrendProps) {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
-      {/* LEFT 9 COLS: FINANCIAL OVERVIEW GRAPH */}
-      <FinancialOverviewChart
-        financialTrendData={financialTrendData}
-        financialSummary={financialSummary}
-      />
+    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      {/* LEFT 8 COLS: FINANCIAL OVERVIEW GRAPH */}
+      <div className="lg:col-span-8">
+        <FinancialOverviewChart
+          financialTrendData={financialTrendData}
+          financialSummary={financialSummary}
+        />
+      </div>
 
-      {/* RIGHT 3 COLS: COMPACT MONTH CALENDAR */}
-      <CompactMonthCalendar />
+      {/* RIGHT 4 COLS: COMPACT MONTH CALENDAR */}
+      <div className="lg:col-span-4">
+        <CompactMonthCalendar />
+      </div>
     </div>
   );
 }

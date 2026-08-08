@@ -32,17 +32,13 @@ export default function AdminOverviewView({
       {/* SECTION 1: ROLE METRICS & QUICK SUMMARY */}
       <AdminRoleCards />
 
-      {/* SECTION 2: FINANCIAL TREND & EARNINGS ANALYTICS */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2">
-          <AdminFinancialTrend financialTrendData={monthlyTrends} />
-        </div>
-        <div className="lg:col-span-1">
-          <AdminEarningsAnalytics financialTrendData={monthlyTrends} />
-        </div>
-      </div>
+      {/* SECTION 2: FINANCIAL OVERVIEW GRAPH & ACADEMIC CALENDAR */}
+      <AdminFinancialTrend financialTrendData={monthlyTrends} />
 
-      {/* SECTION 3: SYSTEM SERVICE HUBS */}
+      {/* SECTION 3: EARNINGS ANALYTICS & MESSAGES INBOX */}
+      <AdminEarningsAnalytics financialTrendData={monthlyTrends} />
+
+      {/* SECTION 4: SYSTEM SERVICE HUBS */}
       <AdminServiceHubs />
     </div>
   );

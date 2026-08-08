@@ -147,7 +147,7 @@ export function FinancialOverviewChart({
 
   return (
     <div
-      className={`lg:col-span-9 p-5 rounded-xl border-none transition-colors duration-300 space-y-4 flex flex-col justify-between min-h-[350px] shadow-md relative overflow-hidden ${
+      className={`w-full p-5 rounded-md border border-slate-200 transition-colors duration-300 space-y-4 flex flex-col justify-between min-h-[350px] shadow-sm relative overflow-hidden ${
         darkTheme
           ? "bg-slate-950 text-white"
           : "bg-white text-slate-900"

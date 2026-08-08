@@ -42,7 +42,7 @@ export function CompactMonthCalendar() {
   }
 
   return (
-    <div className="lg:col-span-3 bg-white p-5 rounded-xl border-none shadow-md space-y-3 flex flex-col justify-between relative overflow-hidden">
+    <div className="w-full bg-white p-5 rounded-md border border-slate-200 shadow-sm space-y-3 flex flex-col justify-between relative overflow-hidden h-full min-h-[350px]">
       {/* Top Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">

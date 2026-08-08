@@ -51,9 +51,9 @@ export default function AdminEarningsAnalytics({
   const safeChartData = Array.isArray(financialTrendData) ? financialTrendData : [];
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
       {/* Redesigned Earnings Card */}
-      <div className="lg:col-span-9 bg-white p-5 rounded-md border border-slate-200 shadow-sm space-y-4 min-h-[300px] flex flex-col justify-between">
+      <div className="lg:col-span-8 bg-white p-5 rounded-md border border-slate-200 shadow-sm space-y-4 min-h-[350px] flex flex-col justify-between">
         <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
           <div>
             <div className="flex items-center gap-2">
@@ -221,7 +221,7 @@ export default function AdminEarningsAnalytics({
       </div>
 
       {/* Messages Preview Card */}
-      <div className="lg:col-span-3 bg-white p-5 rounded-md border border-gray-100 shadow-sm space-y-3 flex flex-col justify-between min-h-[300px]">
+      <div className="lg:col-span-4 bg-white p-5 rounded-md border border-slate-200 shadow-sm space-y-3 flex flex-col justify-between min-h-[350px]">
         <div className="flex items-center justify-between">
           <h3 className="text-sm font-bold text-gray-900 flex items-center gap-2">
             <i className="fi fi-rr-comment-alt text-emerald-600 text-sm"></i> Messages
