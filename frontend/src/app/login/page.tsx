@@ -373,7 +373,7 @@ export default function LoginPage() {
                     <img
                       src={selectedAvatarUrl}
                       alt="Selected Profile Avatar"
-                      className="h-24 w-24 max-w-none object-cover object-center translate-y-1"
+                      className="h-32 w-32 max-w-none object-cover object-center translate-y-1"
                     />
                   </div>
                   <div>
@@ -564,7 +564,7 @@ export default function LoginPage() {
                       <img
                         src={item.url}
                         alt={item.name}
-                        className="h-24 w-24 max-w-none object-cover object-center translate-y-1"
+                        className="h-32 w-32 max-w-none object-cover object-center translate-y-1.5 scale-110"
                       />
                       {isSelected && (
                         <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
