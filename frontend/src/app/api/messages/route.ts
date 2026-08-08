@@ -19,8 +19,67 @@ export const SCH_DEPARTMENTS = [
   "Administration & Accounts",
 ];
 
-// In-memory fallback for when Supabase is not configured
-let inMemoryMessages: any[] = [];
+const DEFAULT_CAMPUS_MESSAGES = [
+  {
+    id: "msg-1",
+    subject: "Higher Math Syllabus & Exam Routine",
+    content: "Higher Math Class 12 Syllabus and midterm routine updated.",
+    sender_name: "Prof. Md. Rafiqul Islam",
+    sender_role: "TEACHER",
+    sender_email: "rafiqul.math@schollege.edu.bd",
+    department: "Higher Mathematics",
+    target_role: "ALL",
+    priority: "HIGH",
+    is_read: false,
+    created_at: new Date().toISOString(),
+    time: "10:30 AM",
+  },
+  {
+    id: "msg-2",
+    subject: "Physics Lab Inspection",
+    content: "Physics Lab equipment inspection completed for Term 2.",
+    sender_name: "Dr. Anowar Hossain",
+    sender_role: "TEACHER",
+    sender_email: "anowar.phy@schollege.edu.bd",
+    department: "Physics",
+    target_role: "ALL",
+    priority: "NORMAL",
+    is_read: false,
+    created_at: new Date().toISOString(),
+    time: "11:15 AM",
+  },
+  {
+    id: "msg-3",
+    subject: "Academic Council Meeting",
+    content: "Staff meeting scheduled for Thursday at 02:00 PM in Conference Room.",
+    sender_name: "Academic Council",
+    sender_role: "ADMIN",
+    sender_email: "council@schollege.edu.bd",
+    department: "Administration & Accounts",
+    target_role: "ALL",
+    priority: "URGENT",
+    is_read: false,
+    created_at: new Date().toISOString(),
+    time: "01:45 PM",
+  },
+  {
+    id: "msg-4",
+    subject: "Faculty Payroll Slips",
+    content: "Monthly faculty salary slips generated and ready for distribution.",
+    sender_name: "Accounts Office",
+    sender_role: "ADMIN",
+    sender_email: "accounts@schollege.edu.bd",
+    department: "Administration & Accounts",
+    target_role: "ALL",
+    priority: "NORMAL",
+    is_read: false,
+    created_at: new Date().toISOString(),
+    time: "03:20 PM",
+  },
+];
+
+// In-memory fallback dataset for when Supabase is not populated
+let inMemoryMessages: any[] = [...DEFAULT_CAMPUS_MESSAGES];
 
 // GET /api/messages — fetch all messages + department list
 export async function GET() {
@@ -81,6 +140,7 @@ export async function POST(request: Request) {
       priority: body.priority || "NORMAL",
       is_read: false,
       created_at: new Date().toISOString(),
+      time: "Just now",
     };
 
     const supabase = createClient();

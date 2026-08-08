@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 
 import {
@@ -22,11 +22,64 @@ interface AdminEarningsAnalyticsProps {
   mockMessages?: any[];
 }
 
+const DEFAULT_FALLBACK_MESSAGES = [
+  {
+    id: "msg-1",
+    sender: "Prof. Md. Rafiqul Islam",
+    text: "Higher Math Class 12 Syllabus and midterm routine updated.",
+    time: "10:30 AM",
+  },
+  {
+    id: "msg-2",
+    sender: "Dr. Anowar Hossain",
+    text: "Physics Lab equipment inspection completed for Term 2.",
+    time: "11:15 AM",
+  },
+  {
+    id: "msg-3",
+    sender: "Academic Council",
+    text: "Staff meeting scheduled for Thursday at 02:00 PM in Conference Room.",
+    time: "01:45 PM",
+  },
+  {
+    id: "msg-4",
+    sender: "Accounts Office",
+    text: "Monthly faculty salary slips generated and ready for distribution.",
+    time: "03:20 PM",
+  },
+];
+
 export default function AdminEarningsAnalytics({
   financialTrendData = [],
   mounted = true,
   mockMessages = [],
 }: AdminEarningsAnalyticsProps) {
+  const [fetchedMessages, setFetchedMessages] = useState<any[]>([]);
+
+  useEffect(() => {
+    fetch("/api/messages")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.messages && Array.isArray(data.messages) && data.messages.length > 0) {
+          const formatted = data.messages.map((m: any) => ({
+            id: m.id,
+            sender: m.sender_name || m.sender || "Campus Notice",
+            text: m.content || m.subject || m.text || "New message received",
+            time: m.time || "Today",
+          }));
+          setFetchedMessages(formatted);
+        }
+      })
+      .catch(() => {});
+  }, []);
+
+  const displayMessages =
+    Array.isArray(mockMessages) && mockMessages.length > 0
+      ? mockMessages
+      : fetchedMessages.length > 0
+      ? fetchedMessages
+      : DEFAULT_FALLBACK_MESSAGES;
+
   const donutData = [
     {
       name: "Tuition Fees",
@@ -232,7 +285,7 @@ export default function AdminEarningsAnalytics({
         </div>
 
         <div className="space-y-3 flex-1 overflow-y-auto max-h-[220px] pr-1">
-          {mockMessages.slice(0, 3).map((msg) => (
+          {displayMessages.slice(0, 3).map((msg) => (
             <div
               key={msg.id}
               className="p-2.5 rounded-md bg-gray-50 border border-gray-100 hover:bg-emerald-50/50 transition cursor-pointer space-y-1"
