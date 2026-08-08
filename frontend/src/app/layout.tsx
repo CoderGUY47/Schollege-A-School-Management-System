@@ -11,8 +11,13 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Schollege - School Management System",
-  description: "Role-Based School & College Management System",
+  title: "Schollege - School & College Management System",
+  description: "Comprehensive Role-Based School & College Management Portal for Students, Faculty, and Administrators",
+  icons: {
+    icon: "/images/logo.png",
+    shortcut: "/images/logo.png",
+    apple: "/images/logo.png",
+  },
 };
 
 export default function RootLayout({

@@ -1,231 +1,126 @@
-# Schollege MS — School & College Management System
+# 🎓 SCHOLLEGE — Complete School & College Management System
 
-> 🔗 **Repository**: [github.com/CoderGUY47/Schollege-A-School-Management-System](https://github.com/CoderGUY47/Schollege-A-School-Management-System)
+<p align="center">
+  <img src="frontend/public/images/logo.png" alt="Schollege Logo" width="120" />
+</p>
 
----
+<p align="center">
+  <strong>A modern, role-based School & College Management System built with Next.js 16, TypeScript, Tailwind CSS, BetterAuth, and Supabase PostgreSQL.</strong>
+</p>
 
-## 💡 Vision
-
-> _"Every student deserves to walk into university life without fear."_
-
-Many school and college students feel anxious and lost when they first encounter a university portal — the dashboards, the role-based systems, the course management interfaces all feel unfamiliar and overwhelming.
-
-**Schollege MS was built to change that.**
-
-The goal is to expose students early to the exact kind of UI and workflow they will face in real university portals — role-based access control (RBAC), course management, assignment submission, grade tracking, and admin systems — so that by the time they step into university, the technology feels **second nature, not a barrier**.
+<p align="center">
+  <a href="https://schollege-portal.vercel.app"><strong>🌐 Explore Live Production Deployment »</strong></a>
+</p>
 
 ---
 
-## 🚀 Project Spotlight
+## 🌟 Key Features & Role Dashboards
 
-**Schollege MS** is an enterprise-grade, full-stack School & College Management and Academic Platform designed for educational institutions. It delivers a role-based portal for **Administrators**, **Teachers**, and **Students**, streamlining academic operations — including course enrollments, digital student ID generation, assignment publishing workflows, automated deadline locking, submission grading, fee tracking, and real-time campus notifications.
+### 👨‍🎓 1. Student Portal (`/student/dashboard`)
+- **Academic Dashboard**: Real-time CGPA tracker, attendance percentage, pending homework count, and subject grades.
+- **Class Routine & Schedule**: Interactive daily class timeline and room assignments.
+- **Assignment Hub**: View assignments, upload submissions, and track teacher grade feedback.
+- **Exams & Results**: Midterm, term-final, and quiz scorecards with performance breakdown.
+- **Avatar Selector**: Choose from 15 custom avatars during registration or Google OAuth login.
 
----
+### 👩‍🏫 2. Teacher / Faculty Portal (`/teacher/dashboard`)
+- **Faculty Dashboard**: Class assignments overview, active student rosters, and upcoming lecture routines.
+- **Assignment Builder**: Create and distribute assignments with custom due dates and grade weights.
+- **Submission Grading Engine**: Review student homework submissions and award numerical scores with comments.
+- **Student Roster Management**: Class-wise student lists with attendance tracking.
 
-### 🛠️ Technologies & Platforms Used
-
-| Layer               | Stack                                                                                             |
-| :------------------ | :------------------------------------------------------------------------------------------------ |
-| **Frontend**        | Next.js 15+ (App Router), React 19, TypeScript, Tailwind CSS v4, Styled-Components, Recharts      |
-| **Backend / API**   | ASP.NET Core 8 Web API (C#) + Next.js Server Route Handlers, OpenAPI / Swagger (`/api/docs`)      |
-| **Database & ORM**  | PostgreSQL (Supabase) / SQLite (local fallback) via Prisma ORM & EF Core 8                        |
-| **Auth & Security** | Better-Auth — OAuth 2.0 (Google), BCrypt password hashing, session management, 1-click demo login |
-| **Testing**         | Vitest (RBAC guards, deadline locking, grading bounds) + xUnit (C# backend API tests)             |
-
----
-
-### 👨‍💻 What Was Personally Built
-
-- **End-to-End Multi-Role Architecture** — Designed and implemented RBAC matrix for Admin, Teacher, and Student roles with protected middleware routing.
-- **Student & Digital ID Generator** — Interactive student portal with dynamic SVG avatar cycling, digital ID card ticket canvas, QR code generation, GPA analytics, and attendance.
-- **Assignment & Grading Engine** — Teacher workflow for create/draft/publish/evaluate submissions with strict mark validation (`0 ≤ marks ≤ maxMarks`) and constructive feedback.
-- **Role-Filtered Notification System** — Real-time notification engine with priority indicators, unread badges, and bulk "mark as read" actions.
-- **Strict Backend Data Primacy Architecture** — Clean separation where the frontend is a pure UI layer powered by RESTful API endpoints (`/api/students`, `/api/notifications`, `/api/assignments`).
+### 🏛️ 3. Admin Executive Portal (`/admin/dashboard`)
+- **Executive Summary**: Real-time personnel summary cards (5,909+ Students, 60+ Faculty, 100+ Staff).
+- **Financial Trend Graph**: Interactive revenue vs. expenditure charts with timeframe controls.
+- **Academic Calendar**: Compact monthly calendar with campus event highlights.
+- **Earnings Analytics & Revenue Breakdown**: Category-wise fee collection statistics (Tuition, Lab, Transport).
+- **Campus Messages Inbox**: Live campus announcements and administrative notice stream.
+- **Service Hubs**: Quick access to Academic, Campus, and Financial management modules.
 
 ---
 
-### 🧩 Technical Challenges & Problems Solved
+## 🔑 Quick Demo Credentials
 
-- **Cross-Navigation Identity Sync** — Fixed session hydration edge-cases that caused fallback user state mismatches across nested dashboard views (e.g., Notice Board → Profile). Enforced session sanitization and backend email alias resolution.
-- **Automated Deadline Locking** — Server-side timestamp validation that auto-locks student submission editing once the assignment due date passes.
-- **Database Agnosticism** — Standardized Prisma ORM and EF Core migrations to switch seamlessly between cloud PostgreSQL (Supabase) and zero-config SQLite for local development.
+Try out the application instantly using the pre-configured 1-Click Quick Demo Sign-In buttons on the login page:
 
----
-
-### ✅ Project Status
-
-**Fully functional & evaluator-ready** — Includes 1-Click Demo Logins for instant role testing.
-
-| Role           | Email            | Password      |
-| :------------- | :--------------- | :------------ |
-| 👑 **Admin**   | `admin@edu.bd`   | `Admin123!`   |
-| 👨‍🏫 **Teacher** | `teacher@edu.bd` | `Teacher123!` |
-| 🎓 **Student** | `student@edu.bd` | `Student123!` |
-
----
-
-## 📋 Full Documentation
-
-## 🌟 Demo Credentials
-
-Quick 1-Click login buttons are available on the sign-in page for immediate evaluator testing:
-
-| Role           | Email Address    | Password      | Privileges                                                                                            |
-| :------------- | :--------------- | :------------ | :---------------------------------------------------------------------------------------------------- |
-| 👑 **Admin**   | `admin@edu.bd`   | `Admin123!`   | Manage Users, Roles, Classes, Subjects, Teacher Assignments, & Enrollments                            |
-| 👨‍🏫 **Teacher** | `teacher@edu.bd` | `Teacher123!` | Create/Edit Assignments, Draft/Publish Toggles, Review Submissions, & Grade with Feedback             |
-| 🎓 **Student** | `student@edu.bd` | `Student123!` | View Enrolled Assignments, Submit Answers & Repo Links, Edit Submissions Before Deadline, View Grades |
-
----
-
-## 🎯 Features & Role Matrix
-
-### 1. 🛡️ Admin Role
-
-- **User & Role Management**: View all registered accounts, change user roles (`ADMIN`, `TEACHER`, `STUDENT`).
-- **Class / Course Setup**: Create classes (e.g. `CS-101`, `MATH-201`) with code and description.
-- **Subject & Teacher Assignment**: Create subjects within classes and assign designated teachers.
-- **Student Enrollment**: Enroll students into specific classes.
-- **System**: Monitor total users, active classes, subjects, assignments, and submission count.
-
-### 2. 👨‍🏫 Teacher Role
-
-- **Assignment Management**: Create, edit, and delete assignments with title, description, max marks, and due date.
-- **Publishing Workflow**: Toggle assignment status between `DRAFT` (hidden from students) and `PUBLISHED` (visible to enrolled students).
-- **Submissions Review Desk**: Inspect student submitted text and attachment links.
-- **Grading & Feedback Engine**: Input numerical marks (validated strictly against `0 <= marks <= maxMarks`), write constructive feedback, and mark status as `GRADED`.
-
-### 3. 🎓 Student Role
-
-- **Enrolled Coursework Feed**: View published assignments for classes the student is enrolled in.
-- **Deadline Indicators**: Real-time status badges (`PENDING`, `SUBMITTED`, `GRADED`, `OVERDUE`).
-- **Answer Submission**: Submit text solutions and attachment links (e.g. GitHub repositories or Cloud links).
-- **Submission Editing**: Edit answer before the due date deadline. Post-deadline editing is automatically locked.
-- **Report & Feedback View**: View assigned marks, grade percentages, and teacher comments.
+| Role | Email | Password | Quick Dashboard Route |
+| :--- | :--- | :--- | :--- |
+| **Admin** | `admin@schollege.edu.bd` | `admin123` | `/admin/dashboard` |
+| **Teacher** | `teacher@schollege.edu.bd` | `teacher123` | `/teacher/dashboard` |
+| **Student** | `student@schollege.edu.bd` | `student123` | `/student/dashboard` |
 
 ---
 
 ## 🛠️ Technology Stack
 
-- **Frontend**: Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS v4, Lucide Icons, React Hook Form.
-- **Backend / REST API**: Next.js Server Route Handlers, TypeScript, OpenAPI / Swagger UI (`/api/docs`).
-- **Database & ORM**: PostgreSQL (Supabase Compatible) / SQLite (Zero-config local fallback) via Prisma ORM.
-- **Authentication**: **Better-Auth** supporting Email/Password, Google OAuth2, and instant 1-Click Demo Login.
-- **Testing**: Vitest with `jsdom` testing business logic, deadline lock rules, grading bounds, and RBAC guards.
+- **Framework**: Next.js 16 (App Router, Turbopack, React 19)
+- **Language**: TypeScript
+- **Styling & UI**: Tailwind CSS, Outfit Typography, Flaticon UI Icons, FontAwesome 6
+- **Charts & Visualizations**: Recharts
+- **Authentication**: BetterAuth SDK + Google OAuth + Custom Quick Demo Sign-In
+- **Backend & Database**: Supabase PostgreSQL + REST API Endpoints (`/api/...`) & `backend/Data/` Data Primary Store
+- **Deployment**: Vercel Production Infrastructure
 
 ---
 
-## 📁 Project Structure
-
-```
-schollege-ms/
-├── backend/                     # ASP.NET Core 8 Web API (C#)
-│   ├── Controllers/             # RESTful API Controllers (Auth, Users, Classes, Subjects, Submissions)
-│   ├── Data/                    # EF Core DbContext & Seed Data Configuration
-│   ├── Models/                  # C# Domain Models (User, ClassCourse, Subject, Assignment, Submission)
-│   ├── SchollegeMS.Tests/       # C# xUnit Test Suite
-│   ├── Program.cs               # Web API Bootstrap, JWT Auth, Swagger & CORS Configuration
-│   └── SchollegeMS.Backend.csproj
-├── frontend/                    # Next.js 16 (TypeScript) Web Application & API Route Handlers
-│   ├── prisma/                  # Prisma Database Models & Seeding
-│   ├── src/
-│   │   ├── app/                 # Next.js App Router (Dashboard, Login, REST APIs, Swagger UI)
-│   │   ├── components/          # React Components (Admin, Teacher, Student Portals, Demo Login)
-│   │   └── lib/                 # Better-Auth, Prisma Client, RBAC Security Guards
-│   ├── tests/                   # Vitest Automated Test Suite
-│   └── package.json
-└── README.md
-```
-
----
-
-## 🚀 Quick Setup Instructions (Local Run)
+## 🚀 Quick Start Guide
 
 ### Prerequisites
+- Node.js 18.x or higher
+- npm 9.x or higher
 
-- Node.js `v18+` or `v22+` installed.
+### Local Development Setup
 
-### 1. Clone & Install Dependencies
-
-```bash
-git clone <repository-url>
-cd schollege-ms/frontend
-npm install
-```
-
-### 2. Environment Configuration
-
-Copy `.env.example` to `.env`:
-
-```bash
-cp .env.example .env
-```
-
-_(The default `.env` is configured out-of-the-box with local zero-config database `DATABASE_URL="file:./dev.db"`)_.
-
-### 3. Database Push & Seeding
-
-To initialize the database schema and populate demo credentials:
-
-```bash
-npm run db:seed
-```
-
-### 4. Start Development Server
-
-```bash
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) in your browser.
-
----
-
-## ☁️ Supabase PostgreSQL Setup (Optional Cloud Setup)
-
-To use **Supabase PostgreSQL** instead of local SQLite:
-
-1. Create a project on [Supabase](https://supabase.com/).
-2. Copy your PostgreSQL Connection String under **Project Settings -> Database**.
-3. Update `DATABASE_URL` in `.env`:
-   ```env
-   DATABASE_URL="postgresql://postgres:[YOUR-PASSWORD]@db.[YOUR-PROJECT-REF].supabase.co:5432/postgres?pgbouncer=true"
-   ```
-4. Update `provider = "postgresql"` in `prisma/schema.prisma`.
-5. Run migrations:
+1. **Clone the repository**:
    ```bash
-   npx prisma db push
-   npx tsx prisma/seed.ts
+   git clone https://github.com/CoderGUY47/Schollege-A-School-Management-System.git
+   cd Schollege-A-School-Management-System
    ```
 
+2. **Install frontend dependencies**:
+   ```bash
+   cd frontend
+   npm install
+   ```
+
+3. **Set up Environment Variables**:
+   Create a `.env.local` file inside `frontend/`:
+   ```env
+   NEXT_PUBLIC_APP_URL=http://localhost:3000
+   BETTER_AUTH_SECRET=your_better_auth_secret_here
+   BETTER_AUTH_URL=http://localhost:3000
+   NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+   ```
+
+4. **Run the Development Server**:
+   ```bash
+   npm run dev
+   ```
+
+5. **Open in Browser**:
+   Navigate to [http://localhost:3000](http://localhost:3000) to view the portal.
+
 ---
 
-## 🧪 Running Unit Tests
+## 📁 Repository Structure
 
-Execute the Vitest test suite to verify business rules:
-
-```bash
-npm run test
+```
+Schollege-A-School-Management-System/
+├── backend/                  # Backend Data Primary Store & Schemas
+│   └── Data/                 # Personnel, Financials, Messages, Routine, Subjects
+├── frontend/                 # Next.js 16 Application Codebase
+│   ├── public/               # Static assets & avatar images (/images/avatars/...)
+│   └── src/
+│       ├── app/              # App Router Pages (/admin, /teacher, /student, /api)
+│       ├── components/       # UI Components & Role Dashboards
+│       └── lib/              # Auth & Supabase Client Utilities
+├── README.md                 # Project Documentation
+└── AGENTS.md                 # Development & Architecture Rules
 ```
 
-**Tested Rules Include**:
-
-- ✅ **RBAC Authorization**: Verify non-teachers cannot create assignments and non-students cannot submit answers.
-- ✅ **Submission Deadline Lock**: Verify submissions after `dueDate` are rejected.
-- ✅ **Grading Constraints**: Verify teacher marks cannot exceed `maxMarks` or be negative.
-- ✅ **Draft Visibility**: Verify draft assignments remain hidden from students until published.
-
 ---
 
-## 📚 Interactive Swagger / OpenAPI Documentation
+## 📄 License
 
-Access the interactive API Documentation live at:
-[http://localhost:3000/api/docs](http://localhost:3000/api/docs)
-
----
-
-## 📌 Documented Assumptions & Known Limitations
-
-1. **Tech Stack Choice**: Next.js App Router full-stack architecture with Prisma ORM was selected to seamlessly integrate **Supabase PostgreSQL** and **Better-Auth** while ensuring 100% platform portability across platforms.
-2. **Attachment Links**: Students can submit text solutions alongside external file URL links (e.g., GitHub repo links or Cloud storage URLs).
-3. **Draft Mode**: Draft assignments are explicitly restricted to Teachers/Admins until toggled to `PUBLISHED`.
+This project is open source and available under the [MIT License](LICENSE).
