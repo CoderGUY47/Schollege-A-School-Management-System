@@ -368,12 +368,12 @@ export default function LoginPage() {
             {isSignUp && (
               <div className="bg-black/5 rounded-2xl p-4 flex items-center justify-between gap-4 border border-slate-200/60 shadow-inner">
                 <div className="flex items-center gap-3">
-                  <div className="h-14 w-14 rounded-full overflow-hidden border-2 border-black bg-white shrink-0 shadow-md flex items-center justify-center">
+                  <div className="rounded-full overflow-hidden border-2 border-indigo-400/50 shadow-lg h-16 w-16 flex items-center justify-center bg-[#2b2b36] shrink-0 relative">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={selectedAvatarUrl}
                       alt="Selected Profile Avatar"
-                      className="h-full w-full object-cover"
+                      className="h-24 w-24 max-w-none object-cover object-center translate-y-1"
                     />
                   </div>
                   <div>
@@ -559,15 +559,15 @@ export default function LoginPage() {
                         : "border-slate-200 hover:border-slate-400"
                     }`}
                   >
-                    <div className="relative h-16 w-16 rounded-full overflow-hidden border border-slate-300 bg-white shadow-xs group-hover:scale-110 transition-transform duration-200">
+                    <div className="rounded-full overflow-hidden border-2 border-indigo-400/50 shadow-md h-16 w-16 flex items-center justify-center bg-[#2b2b36] shrink-0 relative group-hover:scale-105 transition-transform duration-200">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={item.url}
                         alt={item.name}
-                        className="h-full w-full object-cover"
+                        className="h-24 w-24 max-w-none object-cover object-center translate-y-1"
                       />
                       {isSelected && (
-                        <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
+                        <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
                           <i className="fi fi-sr-check-circle text-white text-lg"></i>
                         </div>
                       )}
