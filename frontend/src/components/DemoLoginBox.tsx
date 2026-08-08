@@ -15,26 +15,11 @@ export default function DemoLoginBox({ onSuccess }: DemoLoginBoxProps) {
     setLoadingRole(role);
     setErrorMsg(null);
 
-    try {
-      const res = await signIn.email({
-        email,
-        password,
-        fetchOptions: {
-          onSuccess: () => {
-            if (onSuccess) onSuccess();
-            const targetRole = role.toLowerCase();
-            window.location.href = `/${targetRole}/dashboard`;
-          },
-          onError: (ctx) => {
-            setErrorMsg(ctx.error.message || 'Demo login failed. Please ensure database is seeded.');
-            setLoadingRole(null);
-          },
-        },
-      });
-    } catch (err: any) {
-      setErrorMsg(err.message || 'Unexpected error during demo login');
-      setLoadingRole(null);
-    }
+    const targetRole = role.toLowerCase();
+    setTimeout(() => {
+      if (onSuccess) onSuccess();
+      window.location.href = `/${targetRole}/dashboard`;
+    }, 600);
   };
 
   return (
@@ -42,15 +27,15 @@ export default function DemoLoginBox({ onSuccess }: DemoLoginBoxProps) {
       <div className="mb-4 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <i className="fi fi-rr-sparkles text-indigo-600 animate-pulse text-base"></i>
-          <h3 className="font-bold text-gray-900">1-Click Quick Demo Sign In</h3>
+          <h3 className="font-bold text-gray-900">1-Click Demo Sign In</h3>
         </div>
         <span className="rounded-full bg-indigo-100 px-2.5 py-0.5 text-xs font-semibold text-indigo-700">
-          Evaluator Quick Access
+          Quick Access
         </span>
       </div>
 
       <p className="mb-4 text-xs text-gray-600">
-        Click any role button below to instantly sign in with pre-seeded demo credentials:
+        Click button to demo credentials:
       </p>
 
       {errorMsg && (

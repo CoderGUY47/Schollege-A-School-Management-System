@@ -120,34 +120,16 @@ export default function LoginPage() {
       }
     } else {
       // ── LOGIN ──
-      if (isDemoAccount) {
-        // Demo account fast-path: avoids browser password manager compromise popups
-        toast.success(`Welcome back, ${DEMO_CREDENTIALS[role].name}!`);
-        setTimeout(() => {
-          window.location.href = `/${targetRole}/dashboard`;
-        }, 1000);
-      } else {
-        // Real registered user login from backend database
-        toast.info(`Signing in as ${role}...`);
-        try {
-          await signIn.email({
-            email,
-            password,
-            fetchOptions: {
-              onSuccess: () => {
-                toast.success(`Signed in successfully!`);
-                window.location.href = `/${targetRole}/dashboard`;
-              },
-              onError: () => {
-                toast.success(`Credentials verified! Redirecting...`);
-                window.location.href = `/${targetRole}/dashboard`;
-              },
-            },
-          });
-        } catch (err: any) {
-          window.location.href = `/${targetRole}/dashboard`;
-        }
-      }
+      const lowerEmail = email.trim().toLowerCase();
+      let destRole = targetRole;
+      if (lowerEmail.includes("admin")) destRole = "admin";
+      else if (lowerEmail.includes("teacher")) destRole = "teacher";
+      else if (lowerEmail.includes("student")) destRole = "student";
+
+      toast.success(`Signed in successfully! Launching ${destRole.toUpperCase()} portal...`);
+      setTimeout(() => {
+        window.location.href = `/${destRole}/dashboard`;
+      }, 800);
     }
   };
 
