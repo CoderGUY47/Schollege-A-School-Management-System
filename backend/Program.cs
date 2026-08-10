@@ -8,17 +8,50 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// ─── 1. Database Context — PostgreSQL via Supabase ────────────────────────────
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
-    ?? Environment.GetEnvironmentVariable("DATABASE_URL")
-    ?? throw new InvalidOperationException("No database connection string configured.");
+// ─── 1. Database Context (PostgreSQL when DATABASE_URL is set, SQLite fallback) ──
+var envConn = Environment.GetEnvironmentVariable("DATABASE_URL");
+var appConn = builder.Configuration.GetConnectionString("DefaultConnection");
+
+string connectionString;
+bool isPostgres = false;
+
+if (!string.IsNullOrEmpty(envConn) && !envConn.StartsWith("[SET VIA"))
+{
+    connectionString = envConn;
+    isPostgres = true;
+}
+else if (!string.IsNullOrEmpty(appConn) && !appConn.StartsWith("[SET VIA") && (appConn.Contains("Host=") || appConn.Contains("postgres")))
+{
+    connectionString = appConn;
+    isPostgres = true;
+}
+else
+{
+    // Zero-config SQLite fallback for local development
+    connectionString = "Data Source=schollege.db";
+    isPostgres = false;
+}
 
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(connectionString));
+{
+    if (isPostgres)
+    {
+        options.UseNpgsql(connectionString);
+    }
+    else
+    {
+        options.UseSqlite(connectionString);
+    }
+});
 
 // ─── 2. JWT Authentication ─────────────────────────────────────────────────────
-var jwtKey    = builder.Configuration["Jwt:Secret"]  ?? Environment.GetEnvironmentVariable("JWT_SECRET")
-    ?? throw new InvalidOperationException("Jwt:Secret is not configured.");
+var jwtKey = Environment.GetEnvironmentVariable("JWT_SECRET")
+    ?? builder.Configuration["Jwt:Secret"];
+
+if (string.IsNullOrEmpty(jwtKey) || jwtKey.StartsWith("[SET VIA"))
+{
+    jwtKey = "SchollegeMS_Super_Secret_JWT_Signing_Key_2026_Must_Be_Long!";
+}
 var jwtIssuer  = builder.Configuration["Jwt:Issuer"]  ?? "SchollegeMS.Backend";
 var jwtAudience = builder.Configuration["Jwt:Audience"] ?? "SchollegeMS.Frontend";
 

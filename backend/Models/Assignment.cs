@@ -21,6 +21,7 @@ namespace SchollegeMS.Backend.Models
         public DateTime Deadline { get; set; }
 
         // Alias kept for backward compat
+        [NotMapped]
         public DateTime DueDate { get => Deadline; set => Deadline = value; }
 
         public string Status { get; set; } = "DRAFT"; // DRAFT, PUBLISHED

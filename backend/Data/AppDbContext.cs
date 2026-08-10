@@ -29,6 +29,18 @@ namespace SchollegeMS.Backend.Data
                 .HasIndex(s => new { s.AssignmentId, s.StudentId })
                 .IsUnique();
 
+            modelBuilder.Entity<Submission>()
+                .HasOne(s => s.Student)
+                .WithMany(u => u.Submissions)
+                .HasForeignKey(s => s.StudentId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Submission>()
+                .HasOne(s => s.GradedBy)
+                .WithMany()
+                .HasForeignKey(s => s.GradedById)
+                .OnDelete(DeleteBehavior.Restrict);
+
             // ── Seed Demo Data (per OnnoRokom assignment brief) ──────────────────
             var adminId   = "user-admin-01";
             var teacherId = "user-teacher-01";
