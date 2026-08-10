@@ -88,9 +88,9 @@ The live production application supports 1-Click Quick Demo Sign-In buttons on t
 
 | Role | Email Address | Password | Primary Route |
 | :--- | :--- | :--- | :--- |
-| 🛡️ **Admin** | `admin@demo.com` | `Admin123!` | `/admin/dashboard` |
-| 👩‍🏫 **Teacher** | `teacher@demo.com` | `Teacher123!` | `/teacher/dashboard` |
-| 👨‍🎓 **Student** | `student@demo.com` | `Student123!` | `/student/dashboard` |
+| 🛡️ **Admin** | `admin@demo.com` | `Schollege#Admin2026!` | `/admin/dashboard` |
+| 👩‍🏫 **Teacher** | `teacher@demo.com` | `Schollege#Teacher2026!` | `/teacher/dashboard` |
+| 👨‍🎓 **Student** | `student@demo.com` | `Schollege#Student2026!` | `/student/dashboard` |
 
 > *Note: Legacy `@schollege.edu.bd` logins are also supported via auto-fill.*
 

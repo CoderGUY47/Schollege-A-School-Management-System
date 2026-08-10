@@ -9,16 +9,16 @@ import Loader from "@/components/ui/Loader";
 
 const DEMO_CREDENTIALS = {
   STUDENT: {
-    email: "student@edu.bd",
-    password: "Student123!",
+    email: "student@demo.com",
+    password: "Schollege#Student2026!",
     name: "Aria Rahman",
   },
   TEACHER: {
-    email: "teacher@edu.bd",
-    password: "Teacher123!",
+    email: "teacher@demo.com",
+    password: "Schollege#Teacher2026!",
     name: "Faculty Teacher",
   },
-  ADMIN: { email: "admin@edu.bd", password: "Admin123!", name: "System Admin" },
+  ADMIN: { email: "admin@demo.com", password: "Schollege#Admin2026!", name: "System Admin" },
 };
 
 const ALL_15_AVATARS = [
@@ -457,7 +457,9 @@ export default function LoginPage() {
                 <input
                   type="password"
                   required
-                  autoComplete={isSignUp ? "new-password" : "current-password"}
+                  autoComplete="off"
+                  data-1password-ignore="true"
+                  data-lpignore="true"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"

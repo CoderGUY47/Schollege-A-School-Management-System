@@ -34,9 +34,9 @@ namespace SchollegeMS.Backend.Data
             var teacherId = "user-teacher-01";
             var studentId = "user-student-01";
 
-            var adminHash   = BCrypt.Net.BCrypt.HashPassword("Admin123!");
-            var teacherHash = BCrypt.Net.BCrypt.HashPassword("Teacher123!");
-            var studentHash = BCrypt.Net.BCrypt.HashPassword("Student123!");
+            var adminHash   = BCrypt.Net.BCrypt.HashPassword("Schollege#Admin2026!");
+            var teacherHash = BCrypt.Net.BCrypt.HashPassword("Schollege#Teacher2026!");
+            var studentHash = BCrypt.Net.BCrypt.HashPassword("Schollege#Student2026!");
 
             var csClassId = "class-cs101";
             var webSubId  = "sub-web101";
