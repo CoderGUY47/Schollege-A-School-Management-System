@@ -39,3 +39,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# dotnet build artifacts
+[bB]in/
+[oO]bj/
+*.user
+*.userosscache
+*.sln.docstates
+
