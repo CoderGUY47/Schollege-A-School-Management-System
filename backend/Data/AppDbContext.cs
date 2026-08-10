@@ -103,4 +103,5 @@ namespace SchollegeMS.Backend.Data
                 }
             );
         }
-
+    }
+}
