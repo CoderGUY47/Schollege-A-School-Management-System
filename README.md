@@ -1,4 +1,4 @@
-# 🎓 SCHOLLEGE — School & College Management System
+# 🎓 SCHOLLEGE - School & College Management System
 ### *Role-Based Assignment & Submission Management Platform*
 
 <p align="center">
@@ -6,8 +6,8 @@
 </p>
 
 <p align="center">
-  <a href="https://schollege-portal.vercel.app"><img src="https://img.shields.io/badge/Vercel-Production%20Live-000000?style=for-the-badge&logo=vercel" alt="Vercel Deployment" /></a>
-  <a href="http://localhost:5000/swagger"><img src="https://img.shields.io/badge/Swagger-API%20Explorer%20(v1)-85EA2D?style=for-the-badge&logo=swagger&logoColor=black" alt="Swagger API UI" /></a>
+  <a href="https://schollege-portal.vercel.app"><img src="https://img.shields.io/badge/Live%20Link-https%3A%2F%2Fschollege--portal.vercel.app-000000?style=for-the-badge&logo=vercel" alt="Live Link" /></a>
+  <a href="http://localhost:5000/swagger"><img src="https://img.shields.io/badge/Server%20Api-http%3A%2F%2Flocalhost%3A5000%2Fswagger-85EA2D?style=for-the-badge&logo=swagger&logoColor=black" alt="Server Api" /></a>
   <img src="https://img.shields.io/badge/ASP.NET%20Core-8.0%20Web%20API-512BD4?style=for-the-badge&logo=.net" alt="ASP.NET Core 8" />
   <img src="https://img.shields.io/badge/Next.js-16.3%20(Turbopack)-black?style=for-the-badge&logo=next.js" alt="Next.js 16" />
   <img src="https://img.shields.io/badge/TypeScript-5.x-blue?style=for-the-badge&logo=typescript" alt="TypeScript" />
@@ -15,9 +15,9 @@
 </p>
 
 <p align="center">
-  <strong>🌐 Live Web Portal: <a href="https://schollege-portal.vercel.app">https://schollege-portal.vercel.app</a></strong>
+  <a href="https://schollege-portal.vercel.app"><img src="https://img.shields.io/badge/Live%20Link-Production%20Portal-000000?style=for-the-badge&logo=vercel" alt="Live Link" /></a>
   &nbsp;|&nbsp;
-  <strong>📖 Backend Swagger UI Server: <a href="http://localhost:5000/swagger">http://localhost:5000/swagger</a></strong>
+  <a href="http://localhost:5000/swagger"><img src="https://img.shields.io/badge/Server%20Api-Swagger%20UI-85EA2D?style=for-the-badge&logo=swagger&logoColor=black" alt="Server Api" /></a>
 </p>
 
 ---
@@ -191,10 +191,11 @@ git clone https://github.com/CoderGUY47/Schollege-A-School-Management-System.git
 cd Schollege-A-School-Management-System
 ```
 
-### 2. Backend Setup & Database Migrations
+### 2. Backend Setup & How to Run the Backend API
+
+Run `dotnet run` in your PowerShell terminal:
 ```bash
 cd backend
-# Run database initialization and seed data
 dotnet run
 ```
 * Swagger UI will be available at: **[http://localhost:5000/swagger](http://localhost:5000/swagger)**
