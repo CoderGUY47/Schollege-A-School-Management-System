@@ -25,6 +25,18 @@ namespace SchollegeMS.Backend.Controllers
             return Ok(subjects);
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetSubjectById(string id)
+        {
+            var subject = await _db.Subjects
+                .Include(s => s.Class)
+                .Include(s => s.Teacher)
+                .FirstOrDefaultAsync(s => s.Id == id);
+
+            if (subject == null) return NotFound(new { error = "Subject not found" });
+            return Ok(subject);
+        }
+
         public record CreateSubjectDto(string Code, string Name, string ClassId, string? TeacherId, string? Description);
 
         [HttpPost]
@@ -47,7 +59,26 @@ namespace SchollegeMS.Backend.Controllers
 
             _db.Subjects.Add(subject);
             await _db.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetSubjects), new { id = subject.Id }, subject);
+            return CreatedAtAction(nameof(GetSubjectById), new { id = subject.Id }, subject);
+        }
+
+        public record UpdateSubjectDto(string Code, string Name, string ClassId, string? TeacherId, string? Description);
+
+        [HttpPut("{id}")]
+        [Authorize(Roles = "ADMIN")]
+        public async Task<IActionResult> UpdateSubject(string id, [FromBody] UpdateSubjectDto dto)
+        {
+            var subject = await _db.Subjects.FindAsync(id);
+            if (subject == null) return NotFound(new { error = "Subject not found" });
+
+            subject.Code = dto.Code;
+            subject.Name = dto.Name;
+            subject.ClassId = dto.ClassId;
+            subject.TeacherId = dto.TeacherId;
+            subject.Description = dto.Description;
+
+            await _db.SaveChangesAsync();
+            return Ok(subject);
         }
 
         public record AssignTeacherDto(string TeacherId);
@@ -63,5 +94,18 @@ namespace SchollegeMS.Backend.Controllers
             await _db.SaveChangesAsync();
             return Ok(subject);
         }
+
+        [HttpDelete("{id}")]
+        [Authorize(Roles = "ADMIN")]
+        public async Task<IActionResult> DeleteSubject(string id)
+        {
+            var subject = await _db.Subjects.FindAsync(id);
+            if (subject == null) return NotFound(new { error = "Subject not found" });
+
+            _db.Subjects.Remove(subject);
+            await _db.SaveChangesAsync();
+            return Ok(new { message = "Subject deleted successfully" });
+        }
     }
 }
+

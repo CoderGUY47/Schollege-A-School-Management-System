@@ -26,6 +26,8 @@ namespace SchollegeMS.Backend.Models
 
         public DateTime SubmittedAt { get; set; } = DateTime.UtcNow;
 
+        public DateTime? UpdatedAt { get; set; }
+
         public string Status { get; set; } = "SUBMITTED"; // SUBMITTED, GRADED, RESUBMITTED
 
         public double? Marks { get; set; }

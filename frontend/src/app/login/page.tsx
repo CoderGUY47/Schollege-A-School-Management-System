@@ -77,15 +77,11 @@ export default function LoginPage() {
     setErrorMsg(null);
 
     const targetRole = role.toLowerCase();
-    const isDemoAccount =
-      DEMO_CREDENTIALS[role] &&
-      email.trim().toLowerCase() === DEMO_CREDENTIALS[role].email.toLowerCase();
 
     if (isSignUp) {
-      // ── NEW ACCOUNT REGISTRATION (Stores Selected Avatar & User in Backend Database) ──
+      // ── NEW ACCOUNT REGISTRATION ──
       toast.info(`Registering new ${role} account...`);
       try {
-        // 1. Store user record + selected avatar in backend database API (/api/users)
         await fetch("/api/users", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -98,7 +94,6 @@ export default function LoginPage() {
           }),
         });
 
-        // 2. Trigger BetterAuth email signup
         await signUp.email({
           email,
           password,
@@ -119,7 +114,32 @@ export default function LoginPage() {
         window.location.href = `/${targetRole}/dashboard`;
       }
     } else {
-      // ── LOGIN ──
+      // ── BACKEND JWT LOGIN ──
+      try {
+        const response = await fetch("/api/auth/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password }),
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          if (data.token) {
+            sessionStorage.setItem("access_token", data.token);
+            sessionStorage.setItem("user", JSON.stringify(data.user));
+          }
+          const userRole = (data.user?.role || targetRole).toLowerCase();
+          toast.success(`Signed in successfully as ${userRole.toUpperCase()}!`);
+          setTimeout(() => {
+            window.location.href = `/${userRole}/dashboard`;
+          }, 600);
+          return;
+        }
+      } catch (err) {
+        console.warn("Backend JWT login API offline, using fallback auth:", err);
+      }
+
+      // Fallback for demo mode
       const lowerEmail = email.trim().toLowerCase();
       let destRole = targetRole;
       if (lowerEmail.includes("admin")) destRole = "admin";

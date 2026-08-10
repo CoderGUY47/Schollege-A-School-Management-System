@@ -22,6 +22,9 @@ namespace SchollegeMS.Backend.Models
         [Required]
         public string Role { get; set; } = "STUDENT"; // ADMIN, TEACHER, STUDENT
 
+        /// <summary>For students: the course/class they belong to. Null for Admin/Teacher.</summary>
+        public string? CourseId { get; set; }
+
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         // Navigation Properties

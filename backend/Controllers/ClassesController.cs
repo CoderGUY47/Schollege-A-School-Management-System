@@ -25,6 +25,18 @@ namespace SchollegeMS.Backend.Controllers
             return Ok(classes);
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetClassById(string id)
+        {
+            var cls = await _db.Classes
+                .Include(c => c.Subjects)
+                .Include(c => c.Enrollments)
+                .FirstOrDefaultAsync(c => c.Id == id);
+
+            if (cls == null) return NotFound(new { error = "Class not found" });
+            return Ok(cls);
+        }
+
         public record CreateClassDto(string Code, string Name, string? Description);
 
         [HttpPost]
@@ -45,7 +57,24 @@ namespace SchollegeMS.Backend.Controllers
 
             _db.Classes.Add(newClass);
             await _db.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetClasses), new { id = newClass.Id }, newClass);
+            return CreatedAtAction(nameof(GetClassById), new { id = newClass.Id }, newClass);
+        }
+
+        public record UpdateClassDto(string Code, string Name, string? Description);
+
+        [HttpPut("{id}")]
+        [Authorize(Roles = "ADMIN")]
+        public async Task<IActionResult> UpdateClass(string id, [FromBody] UpdateClassDto dto)
+        {
+            var cls = await _db.Classes.FindAsync(id);
+            if (cls == null) return NotFound(new { error = "Class not found" });
+
+            cls.Code = dto.Code;
+            cls.Name = dto.Name;
+            cls.Description = dto.Description;
+
+            await _db.SaveChangesAsync();
+            return Ok(cls);
         }
 
         [HttpDelete("{id}")]
@@ -53,7 +82,7 @@ namespace SchollegeMS.Backend.Controllers
         public async Task<IActionResult> DeleteClass(string id)
         {
             var cls = await _db.Classes.FindAsync(id);
-            if (cls == null) return NotFound();
+            if (cls == null) return NotFound(new { error = "Class not found" });
 
             _db.Classes.Remove(cls);
             await _db.SaveChangesAsync();
@@ -61,3 +90,4 @@ namespace SchollegeMS.Backend.Controllers
         }
     }
 }
+

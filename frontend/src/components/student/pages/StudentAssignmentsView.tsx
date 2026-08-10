@@ -3,69 +3,6 @@
 import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 
-const DEFAULT_ASSIGNMENTS = [
-  {
-    id: "asg-101",
-    title: "Physics II: Electromagnetism & Gauss's Law Lab",
-    description:
-      "Derive key equations for electric flux across closed spherical surfaces and calculate electromagnetic field induction values for Lab Session 4.",
-    dueDate: "2026-08-15T23:59:59.000Z",
-    maxMarks: 100,
-    class: { code: "CLASS-12A" },
-    subject: { name: "Physics" },
-  },
-  {
-    id: "asg-102",
-    title: "Higher Mathematics: Differential Equations & Integration",
-    description:
-      "Solve problems 14 through 28 from Chapter 7. Submit step-by-step calculus derivations in PDF or handwritten scans.",
-    dueDate: "2026-08-18T23:59:59.000Z",
-    maxMarks: 50,
-    class: { code: "CLASS-12A" },
-    subject: { name: "Mathematics" },
-  },
-  {
-    id: "asg-103",
-    title: "Computer Science: Binary Search Tree & Graph",
-    description:
-      "Implement BFS and DFS graph traversal algorithms in Python or C++. Include time complexity analysis in your documentation.",
-    dueDate: "2026-08-20T23:59:59.000Z",
-    maxMarks: 100,
-    class: { code: "CLASS-12A" },
-    subject: { name: "Computer Science" },
-  },
-  {
-    id: "asg-104",
-    title: "Organic Chemistry: Synthesis & Reaction Mechanisms",
-    description:
-      "Prepare a detailed report explaining aromatic substitution mechanisms, nucleophilic attacks, and lab experiment safety protocols.",
-    dueDate: "2026-08-22T23:59:59.000Z",
-    maxMarks: 75,
-    class: { code: "CLASS-12A" },
-    subject: { name: "Chemistry" },
-  },
-  {
-    id: "asg-105",
-    title: "Cellular Biology: Genetic Engineering & CRISPR",
-    description:
-      "Analyze CRISPR-Cas9 gene editing pathways and write a scientific synthesis paper on recent clinical applications.",
-    dueDate: "2026-08-25T23:59:59.000Z",
-    maxMarks: 100,
-    class: { code: "CLASS-12A" },
-    subject: { name: "Biology" },
-  },
-  {
-    id: "asg-106",
-    title: "English Literature: Victorian Novel Critical Essay",
-    description:
-      "Critique thematic elements of social structure and industrialization in 19th-century English literature.",
-    dueDate: "2026-08-28T23:59:59.000Z",
-    maxMarks: 50,
-    class: { code: "CLASS-12A" },
-    subject: { name: "English" },
-  },
-];
-
 export default function StudentAssignmentsView() {
   const [assignments, setAssignments] = useState<any[]>([]);
   const [submissions, setSubmissions] = useState<any[]>([]);
@@ -84,19 +21,22 @@ export default function StudentAssignmentsView() {
   const fetchStudentData = async () => {
     setLoading(true);
     try {
+      const token = typeof window !== "undefined" ? sessionStorage.getItem("access_token") : null;
+      const headers = {
+        "Content-Type": "application/json",
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      };
+
       const [aRes, sRes] = await Promise.all([
-        fetch("/api/assignments"),
-        fetch("/api/submissions"),
+        fetch("/api/assignments", { headers }),
+        fetch("/api/submissions", { headers }),
       ]);
 
-      let loadedAssignments = [];
       if (aRes.ok) {
-        loadedAssignments = await aRes.json();
-      }
-      if (Array.isArray(loadedAssignments) && loadedAssignments.length > 0) {
-        setAssignments(loadedAssignments);
-      } else {
-        setAssignments(DEFAULT_ASSIGNMENTS);
+        const loadedAssignments = await aRes.json();
+        if (Array.isArray(loadedAssignments)) {
+          setAssignments(loadedAssignments);
+        }
       }
 
       if (sRes.ok) {
@@ -107,11 +47,9 @@ export default function StudentAssignmentsView() {
       }
     } catch (err: any) {
       console.error("Error loading assignment:", err);
-      setAssignments(DEFAULT_ASSIGNMENTS);
+      toast.error("Failed to load assignments from API");
     } finally {
-      setTimeout(() => {
-        setLoading(false);
-      }, 400);
+      setLoading(false);
     }
   };
 

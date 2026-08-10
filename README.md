@@ -7,14 +7,17 @@
 
 <p align="center">
   <a href="https://schollege-portal.vercel.app"><img src="https://img.shields.io/badge/Vercel-Production%20Live-000000?style=for-the-badge&logo=vercel" alt="Vercel Deployment" /></a>
+  <a href="http://localhost:5000/swagger"><img src="https://img.shields.io/badge/Swagger-API%20Explorer%20(v1)-85EA2D?style=for-the-badge&logo=swagger&logoColor=black" alt="Swagger API UI" /></a>
+  <img src="https://img.shields.io/badge/ASP.NET%20Core-8.0%20Web%20API-512BD4?style=for-the-badge&logo=.net" alt="ASP.NET Core 8" />
   <img src="https://img.shields.io/badge/Next.js-16.3%20(Turbopack)-black?style=for-the-badge&logo=next.js" alt="Next.js 16" />
   <img src="https://img.shields.io/badge/TypeScript-5.x-blue?style=for-the-badge&logo=typescript" alt="TypeScript" />
   <img src="https://img.shields.io/badge/Supabase-PostgreSQL-emerald?style=for-the-badge&logo=supabase" alt="Supabase PostgreSQL" />
-  <img src="https://img.shields.io/badge/Tailwind-CSS%20v4-38B2AC?style=for-the-badge&logo=tailwind-css" alt="Tailwind CSS" />
 </p>
 
 <p align="center">
-  <strong>Live Production Portal: <a href="https://schollege-portal.vercel.app">https://schollege-portal.vercel.app</a></strong>
+  <strong>🌐 Live Web Portal: <a href="https://schollege-portal.vercel.app">https://schollege-portal.vercel.app</a></strong>
+  &nbsp;|&nbsp;
+  <strong>📖 Backend Swagger UI Server: <a href="http://localhost:5000/swagger">http://localhost:5000/swagger</a></strong>
 </p>
 
 ---
@@ -79,94 +82,108 @@ The system enables **Teachers** to publish assignments for specific classes and 
 
 ---
 
-## 🔑 Demo Credentials (1-Click Auto-Login Supported)
+## 🔑 Demo Credentials
 
 The live production application supports 1-Click Quick Demo Sign-In buttons on the login screen:
 
 | Role | Email Address | Password | Primary Route |
 | :--- | :--- | :--- | :--- |
-| 🛡️ **Admin** | `admin@schollege.edu.bd` | `admin123` | `/admin/dashboard` |
-| 👩‍🏫 **Teacher** | `teacher@schollege.edu.bd` | `teacher123` | `/teacher/dashboard` |
-| 👨‍🎓 **Student** | `student@schollege.edu.bd` | `student123` | `/student/dashboard` |
+| 🛡️ **Admin** | `admin@demo.com` | `Admin123!` | `/admin/dashboard` |
+| 👩‍🏫 **Teacher** | `teacher@demo.com` | `Teacher123!` | `/teacher/dashboard` |
+| 👨‍🎓 **Student** | `student@demo.com` | `Student123!` | `/student/dashboard` |
 
----
-
-## 📐 Data Model & Entity Relationships
-
-```mermaid
-erDiagram
-    USERS ||--o{ CLASSES : manages
-    USERS ||--o{ ASSIGNMENTS : creates
-    CLASSES ||--|{ SUBJECTS : contains
-    SUBJECTS ||--o{ ASSIGNMENTS : categorized_by
-    ASSIGNMENTS ||--|{ SUBMISSIONS : receives
-    USERS ||--o{ SUBMISSIONS : submits
-
-    USERS {
-        string id PK
-        string name
-        string email
-        string role "ADMIN | TEACHER | STUDENT"
-        string avatarUrl
-        string department
-    }
-    ASSIGNMENTS {
-        string id PK
-        string title
-        string description
-        string classId FK
-        string subjectId FK
-        datetime deadline
-        int maxMarks
-        string status "PUBLISHED | DRAFT"
-    }
-    SUBMISSIONS {
-        string id PK
-        string assignmentId FK
-        string studentId FK
-        string content
-        datetime submittedAt
-        int marks
-        string feedback
-        string status "SUBMITTED | GRADED | LATE"
-    }
-```
+> *Note: Legacy `@schollege.edu.bd` logins are also supported via auto-fill.*
 
 ---
 
 ## 🛠️ Technology Stack & Architecture
 
-- **Frontend Framework**: Next.js 16 (App Router, Turbopack, React 19)
-- **Language**: TypeScript (Strict Type Checking)
+- **Frontend Framework**: Next.js 16 (App Router, Turbopack, React 19, TypeScript)
 - **Styling**: Tailwind CSS v4, Flaticon UI Icons, FontAwesome 6, Google Outfit Font
-- **Data Visualization**: Recharts (Financial Curve Charts, Revenue Donut Charts, Bar Graphs)
-- **Authentication**: BetterAuth SDK + Role-Based Access Control (RBAC) + Google OAuth + Session Tokens
-- **Backend API**: Next.js API Routes (`/api/assignments`, `/api/submissions`, `/api/users`, `/api/classes`, `/api/messages`, `/api/notifications`)
-- **Database Storage**: Supabase PostgreSQL + Primary Data Engine (`backend/Data/`)
-- **Testing**: Jest / React Testing Library unit tests for business logic & authorization
+- **Backend API**: ASP.NET Core 8 Web API + C#, Controller-Based REST API
+- **Data Access & ORM**: Entity Framework Core 8 + Npgsql + PostgreSQL (Supabase)
+- **Authentication**: JWT Bearer Tokens with Role Claims (`ADMIN`, `TEACHER`, `STUDENT`)
+- **Testing**: xUnit (.NET Business Rules & Authorization Suite) + Vitest (Frontend UI Tests)
+- **API Documentation**: OpenAPI / Swagger UI (`/swagger`)
 
 ---
 
-## ⚙️ Environment Configuration (`.env.example`)
+## 📖 OpenAPI & Swagger Interactive API Server
 
-Create a `.env.local` file inside the `frontend/` directory:
+The backend Web API provides interactive OpenAPI 3.0 documentation via Swagger UI. You can test and inspect all API endpoints directly in your browser:
 
+* **Swagger Server UI URL**: **[http://localhost:5000/swagger](http://localhost:5000/swagger)**
+* **OpenAPI Spec JSON**: **`http://localhost:5000/swagger/v1/swagger.json`**
+
+### 📌 REST API Endpoint Reference Map
+
+| Method | Endpoint Route | Authorization / Role | Purpose / Feature |
+| :--- | :--- | :--- | :--- |
+| `POST` | `/api/auth/login` | Public | Validate credentials & issue JWT token with role claim |
+| `POST` | `/api/auth/register` | Public | Register new student/teacher user account |
+| `GET` | `/api/assignments` | Authenticated (All) | List assignments (Student sees PUBLISHED for enrolled course; Teacher sees owned) |
+| `GET` | `/api/assignments/{id}` | Authenticated (All) | Get single assignment detail with course & subject |
+| `POST` | `/api/assignments` | `TEACHER`, `ADMIN` | Create new assignment (Draft or Published) |
+| `PUT` | `/api/assignments/{id}` | `TEACHER`, `ADMIN` | Update assignment title, description, deadline, max marks (Teacher owner check) |
+| `DELETE` | `/api/assignments/{id}` | `TEACHER`, `ADMIN` | Delete assignment (Teacher ownership check) |
+| `PATCH` | `/api/assignments/{id}/status` | `TEACHER`, `ADMIN` | Update status (Draft $\rightarrow$ Published) |
+| `GET` | `/api/assignments/{id}/submissions` | `TEACHER`, `ADMIN` | List all student submissions for a specific assignment |
+| `GET` | `/api/submissions` | Authenticated (All) | Get submissions (Student sees owned; Teacher sees assigned) |
+| `POST` | `/api/submissions` | `STUDENT` | Submit answer text + file link (Enforces class enrollment & deadline lock) |
+| `PUT` | `/api/submissions/{id}` | `STUDENT` | Update submitted answer before deadline expiration |
+| `POST` / `PATCH` | `/api/submissions/{id}/grade` | `TEACHER`, `ADMIN` | Assign marks & feedback (Enforces teacher ownership & `[0, MaxMarks]` cap) |
+| `GET` | `/api/users` | `ADMIN` | List all system users with roles & course memberships |
+| `POST` | `/api/users` | `ADMIN` | Create new user account |
+| `PUT` | `/api/users/{id}` | `ADMIN` | Edit user profile & role |
+| `DELETE` | `/api/users/{id}` | `ADMIN` | Delete user account |
+| `GET` | `/api/classes` | Authenticated (All) | List all courses/classes with subjects and enrollments |
+| `POST` | `/api/classes` | `ADMIN` | Create new class/course offering |
+| `PUT` | `/api/classes/{id}` | `ADMIN` | Update class details |
+| `DELETE` | `/api/classes/{id}` | `ADMIN` | Delete class offering |
+| `GET` | `/api/subjects` | Authenticated (All) | List all subjects with assigned teachers |
+| `POST` | `/api/subjects` | `ADMIN` | Create new subject mapped to class |
+| `PUT` | `/api/subjects/{id}` | `ADMIN` | Edit subject details |
+| `PATCH` | `/api/subjects/{id}/assign-teacher` | `ADMIN` | Assign or re-assign faculty teacher to subject |
+| `DELETE` | `/api/subjects/{id}` | `ADMIN` | Delete subject |
+
+---
+
+## ⚙️ Environment Configuration
+
+### Root / Backend Environment Variables (`.env.example`)
+Create `.env` or set environment variables:
 ```env
-# Application Base URL
-NEXT_PUBLIC_APP_URL=http://localhost:3000
+# Backend Connection String (PostgreSQL / Supabase)
+ConnectionStrings__DefaultConnection=Host=aws-0-ap-northeast-1.pooler.supabase.com;Port=6543;Database=postgres;Username=postgres.ceuccjbxfdyhudkigrhf;Password=YOUR_PASSWORD;SSL Mode=Require
 
-# BetterAuth Authentication Configuration
+# JWT Configuration
+Jwt__Secret=SchollegeMS_Super_Secret_JWT_Signing_Key_2026_Must_Be_Long!
+Jwt__Issuer=SchollegeMS.Backend
+Jwt__Audience=SchollegeMS.Frontend
+
+# CORS Allowed Origin
+FrontendUrl=http://localhost:3000
+```
+
+### Frontend Configuration (`frontend/.env.local`)
+```env
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+NEXT_PUBLIC_API_URL=http://localhost:5000/api
+NEXT_PUBLIC_SUPABASE_URL=https://ceuccjbxfdyhudkigrhf.supabase.co
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your_supabase_anon_key
 BETTER_AUTH_SECRET=schollege_production_auth_secret_key_2026
 BETTER_AUTH_URL=http://localhost:3000
-
-# Supabase PostgreSQL Configuration
-NEXT_PUBLIC_SUPABASE_URL=https://your-supabase-project.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
 ```
 
 ---
 
-## 💻 Local Setup & Development Instructions
+## 💻 System Prerequisites & Local Setup
+
+### Prerequisites
+- **Node.js**: v20.0 or higher
+- **npm**: v10.0 or higher
+- **.NET SDK**: 8.0 SDK or higher
+- **PostgreSQL**: 16+ (or Supabase Connection String)
 
 ### 1. Clone the Repository
 ```bash
@@ -174,22 +191,52 @@ git clone https://github.com/CoderGUY47/Schollege-A-School-Management-System.git
 cd Schollege-A-School-Management-System
 ```
 
-### 2. Install Dependencies
+### 2. Backend Setup & Database Migrations
+```bash
+cd backend
+# Run database initialization and seed data
+dotnet run
+```
+* Swagger UI will be available at: **[http://localhost:5000/swagger](http://localhost:5000/swagger)**
+
+### 3. Frontend Setup
 ```bash
 cd frontend
 npm install
-```
-
-### 3. Run Development Server
-```bash
 npm run dev
 ```
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+* Frontend Application will launch at: **[http://localhost:3000](http://localhost:3000)**
 
-### 4. Execute Unit Tests
+### 4. Running Unit Tests
 ```bash
+# Backend xUnit Business Rules Suite (8/8 tests)
+cd backend/SchollegeMS.Tests
+dotnet test
+
+# Frontend Component & UI Validation Suite
+cd frontend
 npm test
 ```
+
+---
+
+## 💡 System Assumptions
+
+1. **Class Membership**: A student belongs to one main course/class for this assessment MVP.
+2. **Subject Ownership**: A subject belongs to one course/class; teachers are mapped to course-subject combinations.
+3. **Text Submissions**: Students submit text solutions and optional URL attachments.
+4. **Single Active Submission**: A student has one submission record per assignment, which may be updated prior to deadline expiration.
+5. **Deadline Enforcement**: Submissions and updates after the deadline timestamp are automatically rejected by API business logic.
+6. **Marks Boundaries**: Marks awarded by teachers must strictly be within `[0, MaxMarks]`.
+7. **Draft Isolation**: Only assignments marked as `PUBLISHED` are visible to students.
+
+---
+
+## 🚧 Known Limitations & Future Scope
+
+- **File Storage**: Attachments currently accept direct URLs. Direct Cloud Storage (S3/GCS/Azure Blob) can be integrated in future phases.
+- **Push Notifications**: Real-time email/SMS alerts for new assignments can be added via SignalR or Webhooks.
+- **Plagiarism Analysis**: Text similarity checking algorithms can be integrated post-MVP.
 
 ---
 
@@ -197,20 +244,20 @@ npm test
 
 ```
 Schollege-A-School-Management-System/
-├── backend/                        # Backend Primary Data Store & Schemas
-│   └── Data/                       # Admin, Teacher, Student, Assignments Data
+├── backend/                        # ASP.NET Core 8 Web API
+│   ├── Controllers/                # Auth, Assignments, Submissions, Users, Classes, Subjects
+│   ├── Data/                       # AppDbContext & Seed Data
+│   ├── Middleware/                 # Global Exception Middleware
+│   ├── Models/                     # User, Assignment, Submission, ClassCourse, Subject
+│   └── SchollegeMS.Tests/          # xUnit Business Rules Unit Tests
 ├── frontend/                       # Next.js 16 Application Codebase
-│   ├── public/                     # Static Assets, Avatars (/images/avatars/...)
+│   ├── public/                     # Static Assets & Avatars (/images/avatars/...)
 │   └── src/
 │       ├── app/                    # App Router Pages & API Routes (/api/...)
-│       │   ├── admin/              # Executive Admin Dashboard Routes
-│       │   ├── teacher/            # Teacher Faculty Dashboard Routes
-│       │   ├── student/            # Student Academic Dashboard Routes
-│       │   └── api/                # RESTful API Endpoints
-│       ├── components/             # Role Dashboard Views & UI Components
-│       └── lib/                    # Auth, Supabase Client & Utility Modules
-├── README.md                       # Comprehensive Project Documentation
-└── AGENTS.md                       # Architectural Guidelines
+│       ├── components/             # Admin, Teacher, and Student Portal Views
+│       └── lib/                    # API Client, Auth Utilities & Submissions Logic
+├── README.md                       # Comprehensive System Documentation
+└── AGENTS.md                       # Project Architectural Guidelines
 ```
 
 ---
@@ -218,14 +265,15 @@ Schollege-A-School-Management-System/
 ## ✅ Final Submission Checklist
 
 - [x] **Git Repository Link**: Accessible on GitHub.
-- [x] **Full Stack Codebase**: Includes frontend, backend REST API routes, data models, and tests.
-- [x] **Database Files & Seed Data**: Pre-seeded dataset included in `backend/Data/` and Supabase PostgreSQL schema.
-- [x] **Demo Accounts**: Admin, Teacher, and Student login credentials functional with 1-click auto-login.
-- [x] **Role-Based Access Control (RBAC)**: Authorization enforced on routes and API endpoints.
-- [x] **Live Production Deployment**: Fully deployed and functional on Vercel.
-- [x] **Zero Secrets Committed**: All sensitive parameters safely parameterized in environment variables.
+- [x] **Full Stack Codebase**: ASP.NET Core API + Next.js App Router + EF Core + xUnit.
+- [x] **Database Schema & Migrations**: Reproducible PostgreSQL setup with seeded demo accounts.
+- [x] **Demo Accounts**: Working credentials for Admin, Teacher, and Student with 1-click login.
+- [x] **Role-Based Access Control (RBAC)**: Backend role claims enforced via `[Authorize(Roles = "...")]`.
+- [x] **Business Rules Tested**: 8/8 core rule tests covering deadlines, marks, draft visibility, and ownership.
+- [x] **Zero Secrets Committed**: Environment templates provided; no sensitive production secrets in source.
 
 ---
 
 ## 📄 License
 This project is open-source and released under the **[MIT License](LICENSE)**.
+

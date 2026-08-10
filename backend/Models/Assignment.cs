@@ -18,9 +18,14 @@ namespace SchollegeMS.Backend.Models
 
         public int MaxMarks { get; set; } = 100;
 
-        public DateTime DueDate { get; set; }
+        public DateTime Deadline { get; set; }
+
+        // Alias kept for backward compat
+        public DateTime DueDate { get => Deadline; set => Deadline = value; }
 
         public string Status { get; set; } = "DRAFT"; // DRAFT, PUBLISHED
+
+        public bool AllowResubmission { get; set; } = false;
 
         [Required]
         public string ClassId { get; set; } = string.Empty;

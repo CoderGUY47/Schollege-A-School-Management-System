@@ -1,0 +1,14 @@
+[
+  { "id": "fin-01", "month": "Jan", "income": 350000, "expense": 200000, "year": 2026 },
+  { "id": "fin-02", "month": "Feb", "income": 420000, "expense": 250000, "year": 2026 },
+  { "id": "fin-03", "month": "Mar", "income": 390000, "expense": 210000, "year": 2026 },
+  { "id": "fin-04", "month": "Apr", "income": 480000, "expense": 280000, "year": 2026 },
+  { "id": "fin-05", "month": "May", "income": 550000, "expense": 300000, "year": 2026 },
+  { "id": "fin-06", "month": "Jun", "income": 620000, "expense": 350000, "year": 2026 },
+  { "id": "fin-07", "month": "Jul", "income": 710000, "expense": 400000, "year": 2026 },
+  { "id": "fin-08", "month": "Aug", "income": 837000, "expense": 500000, "year": 2026 },
+  { "id": "fin-09", "month": "Sep", "income": 680000, "expense": 320000, "year": 2026 },
+  { "id": "fin-10", "month": "Oct", "income": 750000, "expense": 380000, "year": 2026 },
+  { "id": "fin-11", "month": "Nov", "income": 640000, "expense": 310000, "year": 2026 },
+  { "id": "fin-12", "month": "Dec", "income": 920000, "expense": 450000, "year": 2026 }
+]

@@ -55,8 +55,15 @@ namespace SchollegeMS.Backend.Controllers
                 return BadRequest(new { error = "Cannot submit to a draft assignment." });
             }
 
+            // Cross-Course Business Rule: Student must be enrolled in the assignment's class
+            var isEnrolled = await _db.Enrollments.AnyAsync(e => e.StudentId == studentId && e.ClassId == assignment.ClassId);
+            if (!isEnrolled)
+            {
+                return Forbid();
+            }
+
             // Deadline Check Business Rule
-            if (DateTime.UtcNow > assignment.DueDate)
+            if (DateTime.UtcNow > assignment.Deadline)
             {
                 return BadRequest(new { error = "Submission deadline has passed. Late submissions are not allowed." });
             }
@@ -81,9 +88,41 @@ namespace SchollegeMS.Backend.Controllers
             {
                 submission.Content = dto.Content;
                 submission.FileUrl = dto.FileUrl;
-                submission.SubmittedAt = DateTime.UtcNow;
+                submission.UpdatedAt = DateTime.UtcNow;
                 submission.Status = "SUBMITTED";
             }
+
+            await _db.SaveChangesAsync();
+            return Ok(submission);
+        }
+
+        public record UpdateSubmissionDto(string Content, string? FileUrl);
+
+        [HttpPut("{id}")]
+        [Authorize(Roles = "STUDENT")]
+        public async Task<IActionResult> UpdateSubmission(string id, [FromBody] UpdateSubmissionDto dto)
+        {
+            var studentId = User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "";
+
+            var submission = await _db.Submissions
+                .Include(s => s.Assignment)
+                .FirstOrDefaultAsync(s => s.Id == id);
+
+            if (submission == null) return NotFound(new { error = "Submission not found." });
+
+            if (submission.StudentId != studentId)
+            {
+                return Forbid();
+            }
+
+            if (DateTime.UtcNow > submission.Assignment!.Deadline)
+            {
+                return BadRequest(new { error = "Submission deadline has passed. Late updates are not allowed." });
+            }
+
+            submission.Content = dto.Content;
+            submission.FileUrl = dto.FileUrl;
+            submission.UpdatedAt = DateTime.UtcNow;
 
             await _db.SaveChangesAsync();
             return Ok(submission);
@@ -92,16 +131,30 @@ namespace SchollegeMS.Backend.Controllers
         public record GradeSubmissionDto(double Marks, string? Feedback);
 
         [HttpPost("{id}/grade")]
+        [HttpPatch("{id}/grade")]
         [Authorize(Roles = "TEACHER,ADMIN")]
         public async Task<IActionResult> GradeSubmission(string id, [FromBody] GradeSubmissionDto dto)
         {
             var teacherId = User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "";
+            var userRole = User.FindFirstValue(ClaimTypes.Role) ?? "";
 
             var submission = await _db.Submissions
                 .Include(s => s.Assignment)
+                .ThenInclude(a => a!.Subject)
                 .FirstOrDefaultAsync(s => s.Id == id);
 
             if (submission == null) return NotFound(new { error = "Submission not found." });
+
+            // Teacher Ownership Rule: Only the assigning teacher or subject teacher can grade
+            if (userRole == "TEACHER")
+            {
+                bool isOwner = submission.Assignment!.TeacherId == teacherId ||
+                               (submission.Assignment.Subject != null && submission.Assignment.Subject.TeacherId == teacherId);
+                if (!isOwner)
+                {
+                    return Forbid();
+                }
+            }
 
             // MaxMarks Boundary Validation Rule
             if (dto.Marks < 0 || dto.Marks > submission.Assignment!.MaxMarks)
@@ -120,3 +173,4 @@ namespace SchollegeMS.Backend.Controllers
         }
     }
 }
+
