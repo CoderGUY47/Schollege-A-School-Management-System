@@ -23,7 +23,7 @@ export async function GET() {
         const spec = {
           "openapi": "3.0.0",
           "info": {
-            "title": "Schollege MS - Assignment & Submission Management API",
+            "title": "Schollege MS API",
             "version": "1.0.0",
             "description": "RESTful API documentation for Schollege MS. Enforces RBAC permissions for Admin, Teacher, and Student roles."
           },

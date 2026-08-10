@@ -108,9 +108,9 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo
     {
-        Title       = "Schollege MS — Assignment & Submission API",
+        Title       = "Schollege MS API",
         Version     = "v1",
-        Description = "Role-Based Assignment & Submission Management API. JWT Bearer required for protected endpoints."
+        Description = "Role-Based Management API. JWT Bearer required for protected endpoints."
     });
 
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
