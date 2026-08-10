@@ -42,7 +42,7 @@ export function CompactMonthCalendar() {
   }
 
   return (
-    <div className="w-full bg-white p-5 rounded-md border border-slate-200 shadow-sm space-y-3 flex flex-col justify-between relative overflow-hidden h-full min-h-[350px]">
+    <div className="w-full bg-white p-5 rounded-md border border-slate-200 shadow-sm space-y-3 flex flex-col justify-between relative overflow-hidden h-full min-h-87.5">
       {/* Top Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
@@ -182,7 +182,7 @@ export function CompactMonthCalendar() {
       {/* Gradient Manage Calendar Button */}
       <Link
         href="/admin/calendar"
-        className="flex items-center justify-center gap-2 w-full text-[11px] font-extrabold bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white py-2 rounded-md shadow-md shadow-indigo-100 transition"
+        className="flex items-center justify-center gap-2 w-full text-[11px] font-extrabold bg-linear-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white py-2 rounded-md shadow-md shadow-indigo-100 transition"
       >
         <i className="fi fi-rr-calendar-check text-xs" aria-hidden="true" />
         <span>Manage Full Calendar</span>

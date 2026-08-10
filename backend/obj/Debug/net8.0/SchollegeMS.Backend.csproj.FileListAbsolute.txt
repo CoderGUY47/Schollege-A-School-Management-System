@@ -141,3 +141,14 @@ E:\Projects-xyz\schollege-ms\backend\obj\Debug\net8.0\SchollegeMS.Backend.genrun
 E:\Projects-xyz\schollege-ms\backend\obj\Debug\net8.0\ref\SchollegeMS.Backend.dll
 E:\Projects-xyz\schollege-ms\backend\bin\Debug\net8.0\SchollegeMS.Tests\obj\project.assets.json
 E:\Projects-xyz\schollege-ms\backend\bin\Debug\net8.0\SchollegeMS.Tests\obj\SchollegeMS.Tests.csproj.nuget.dgspec.json
+E:\Projects-xyz\schollege-ms\backend\bin\Debug\net8.0\SchollegeMS.Tests\bin\Debug\net8.0\appsettings.json
+E:\Projects-xyz\schollege-ms\backend\bin\Debug\net8.0\SchollegeMS.Tests\bin\Debug\net8.0\Data\Exam\exams.json
+E:\Projects-xyz\schollege-ms\backend\bin\Debug\net8.0\SchollegeMS.Tests\bin\Debug\net8.0\Data\Finance\finance.json
+E:\Projects-xyz\schollege-ms\backend\bin\Debug\net8.0\SchollegeMS.Tests\bin\Debug\net8.0\Data\Notice\notices.json
+E:\Projects-xyz\schollege-ms\backend\bin\Debug\net8.0\SchollegeMS.Tests\bin\Debug\net8.0\SchollegeMS.Backend.deps.json
+E:\Projects-xyz\schollege-ms\backend\bin\Debug\net8.0\SchollegeMS.Tests\bin\Debug\net8.0\SchollegeMS.Backend.runtimeconfig.json
+E:\Projects-xyz\schollege-ms\backend\bin\Debug\net8.0\SchollegeMS.Tests\bin\Debug\net8.0\SchollegeMS.Tests.deps.json
+E:\Projects-xyz\schollege-ms\backend\bin\Debug\net8.0\SchollegeMS.Tests\bin\Debug\net8.0\SchollegeMS.Tests.runtimeconfig.json
+E:\Projects-xyz\schollege-ms\backend\bin\Debug\net8.0\SchollegeMS.Tests\bin\Debug\net8.0\SchollegeMS.Tests\obj\project.assets.json
+E:\Projects-xyz\schollege-ms\backend\bin\Debug\net8.0\SchollegeMS.Tests\bin\Debug\net8.0\SchollegeMS.Tests\obj\SchollegeMS.Tests.csproj.nuget.dgspec.json
+E:\Projects-xyz\schollege-ms\backend\bin\Debug\net8.0\SchollegeMS.Tests\obj\Debug\net8.0\SchollegeMS.Tests.sourcelink.json

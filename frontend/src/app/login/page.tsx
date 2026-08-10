@@ -218,15 +218,15 @@ export default function LoginPage() {
         </div>
 
         {/* SINGLE CONTAINER DIV WITH 2 COLUMNS */}
-        <div className="w-[85%] max-w-7xl bg-white rounded-md shadow-2xl overflow-hidden grid grid-cols-1 md:grid-cols-2 border-none min-h-[580px]">
+        <div className="w-[85%] max-w-7xl bg-white rounded-md shadow-2xl overflow-hidden grid grid-cols-1 md:grid-cols-2 border-none min-h-145">
           {/* COLUMN 1: LEFT HERO / BRANDING PANEL */}
-          <div className="relative p-10 md:p-14 text-white flex flex-col justify-between overflow-hidden min-h-[580px] border-none">
+          <div className="relative p-10 md:p-14 text-white flex flex-col justify-between overflow-hidden min-h-145 border-none">
             {/* Background Image & Overlay */}
             <div
               className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40"
               style={{ backgroundImage: `url('/images/campus.jpg')` }}
             />
-            <div className="absolute inset-0 bg-gradient-to-br from-black via-black/90 to-black/80" />
+            <div className="absolute inset-0 bg-linear-to-br from-black via-black/90 to-black/80" />
 
             {/* Branding Content */}
             <div className="relative z-10 space-y-6">
@@ -540,7 +540,7 @@ export default function LoginPage() {
 
       {/* ── 15 AVATARS SELECTION MODAL ── */}
       {showAvatarModal && (
-        <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 backdrop-blur-md p-4 animate-in fade-in duration-200">
+        <div className="fixed inset-0 z-9999 flex items-center justify-center bg-black/60 backdrop-blur-md p-4 animate-in fade-in duration-200">
           <div className="w-full max-w-2xl bg-white rounded-2xl shadow-2xl p-6 space-y-5 animate-in zoom-in-95 duration-200 border border-slate-100 max-h-[90vh] overflow-y-auto font-outfit">
             {/* Modal Header */}
             <div className="flex items-center justify-between border-b border-gray-100 pb-3">

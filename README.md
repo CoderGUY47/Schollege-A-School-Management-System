@@ -1,5 +1,6 @@
 # 🎓 SCHOLLEGE - School & College Management System
-### *Role-Based Assignment & Submission Management Platform*
+
+## *Role-Based Assignment & Submission Management Platform*
 
 <p align="center">
   <img src="frontend/public/images/logo.png" alt="Schollege Logo" width="130" />
@@ -16,13 +17,14 @@
 
 <p align="center">
   <a href="https://schollege-portal.vercel.app"><img src="https://img.shields.io/badge/Live%20Link-Production%20Portal-000000?style=for-the-badge&logo=vercel" alt="Live Link" /></a>
-  &nbsp;|&nbsp;
+  &nbsp; &nbsp;
   <a href="http://localhost:5000/swagger"><img src="https://img.shields.io/badge/Server%20Api-Swagger%20UI-85EA2D?style=for-the-badge&logo=swagger&logoColor=black" alt="Server Api" /></a>
 </p>
 
 ---
 
 ## 📌 Project Overview & Brief
+
 **Schollege** is a comprehensive, production-ready **School & College Management System** featuring a role-based **Assignment & Submission Management Platform**.
 
 The system enables **Teachers** to publish assignments for specific classes and subjects with deadlined submission windows, **Students** to view deadlines, submit homework, and receive grades, and **Administrators** to manage user rosters, course allocations, financial analytics, and system-wide announcements.

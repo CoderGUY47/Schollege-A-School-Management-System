@@ -172,7 +172,7 @@ export default function AdminHeader({ activeMenu }: { activeMenu?: string } = {}
           >
             <i className="fi fi-rr-bell text-sm"></i>
             {unreadCount > 0 && (
-              <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] bg-red-500 text-white text-[9px] font-bold rounded-full flex items-center justify-center px-1 leading-none shadow-sm">
+              <span className="absolute -top-1 -right-1 min-w-4.5 h-4.5 bg-red-500 text-white text-[9px] font-bold rounded-full flex items-center justify-center px-1 leading-none shadow-sm">
                 {unreadCount > 9 ? "9+" : unreadCount}
               </span>
             )}
@@ -180,7 +180,7 @@ export default function AdminHeader({ activeMenu }: { activeMenu?: string } = {}
 
           {/* Dropdown Panel */}
           {open && (
-            <div className="absolute right-0 top-11 w-[360px] bg-white rounded-xl border border-slate-200 shadow-2xl shadow-slate-200/80 z-50 overflow-hidden">
+            <div className="absolute right-0 top-11 w-90 bg-white rounded-xl border border-slate-200 shadow-2xl shadow-slate-200/80 z-50 overflow-hidden">
               {/* Header */}
               <div className="flex items-center justify-between px-4 py-3 border-b border-slate-100 bg-slate-50">
                 <div className="flex items-center gap-2">
@@ -212,7 +212,7 @@ export default function AdminHeader({ activeMenu }: { activeMenu?: string } = {}
               </div>
 
               {/* List */}
-              <div className="max-h-[420px] overflow-y-auto divide-y divide-slate-50">
+              <div className="max-h-105 overflow-y-auto divide-y divide-slate-50">
                 {loading ? (
                   <div className="flex items-center justify-center py-10">
                     <div className="h-5 w-5 border-2 border-slate-300 border-t-slate-700 rounded-full animate-spin" />
@@ -237,7 +237,7 @@ export default function AdminHeader({ activeMenu }: { activeMenu?: string } = {}
                         }}
                       >
                         {/* Icon */}
-                        <div className={`h-8 w-8 rounded-lg ${cfg.bg} flex items-center justify-center flex-shrink-0 mt-0.5`}>
+                        <div className={`h-8 w-8 rounded-lg ${cfg.bg} flex items-center justify-center shrink-0 mt-0.5`}>
                           <i className={`${cfg.iconClass} text-xs ${cfg.color}`}></i>
                         </div>
 
@@ -247,7 +247,7 @@ export default function AdminHeader({ activeMenu }: { activeMenu?: string } = {}
                             <p className={`text-xs font-bold leading-snug ${notif.isRead ? "text-slate-600" : "text-slate-900"} line-clamp-1`}>
                               {notif.title}
                             </p>
-                            <div className="flex items-center gap-1 flex-shrink-0">
+                            <div className="flex items-center gap-1 shrink-0">
                               <span className={`h-1.5 w-1.5 rounded-full ${PRIORITY_DOT[notif.priority]}`} />
                               {!notif.isRead && (
                                 <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
